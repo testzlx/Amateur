@@ -1,0 +1,31 @@
+# some special file to ignore
+# some special directory to ignore
+/src/main/webapp/WEB-INF/classes
+/src/main/webapp/WEB-INF/lib
+/src/main/webapp/static/**/.cache/
+/src/main/profiles/local/
+/finance-account-biz/src/main/webapp/META-INF
+# eclipse intellij ide settings
+*/target
+/target
+/.settings
+/.classpath
+/.project
+/build
+/logs
+/finance-account-biz/logs
+/classes
+/.idea
+rebel.xml
+
+# some special files to ignore
+.DS_Store
+*.iml
+*.ipr
+*.iws
+*.swp
+*.log
+#.class
+rebel.xml
+
+# some should be ignored later logs
