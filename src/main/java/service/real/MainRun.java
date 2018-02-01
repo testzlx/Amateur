@@ -11,7 +11,8 @@ public class MainRun {
 		int numTrees=100;
 		
 		DescribeTrees DT = new DescribeTrees(traindata);
-		ArrayList<int[]> Input=DT.CreateInput(traindata);int categ=0;
+		ArrayList<int[]> Input=DT.CreateInput(traindata);
+		int categ=0;
 		
 		DescribeTrees DTT = new DescribeTrees(traindata);
 		ArrayList<int[]> Test=DTT.CreateInput(testdata);

@@ -1,5 +1,9 @@
 package service.algorithm;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -9,6 +13,7 @@ import java.util.HashMap;
  * 照抄网上hashmap+list实现http://blog.csdn.net/flying_panda/article/details/48352207
  */
 public class LRUCache1<K, V> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LRUCache1.class);
     private final int MAX_CACHE_SIZE;
     private Entry first;
     private Entry last;
@@ -128,8 +133,21 @@ public class LRUCache1<K, V> {
     }
 
     public static void main(String[] args) {
-        lruCache1();
+        //  lruCache1();
+        Date date = new Date();
+        System.out.println("date:" + date + "  long: " + date.getTime());
+        date = new Date(date.getTime());
+        System.out.println(date);
+        printStack();
     }
+
+    public  static void  printStack(){
+            LOGGER.info("分门店账户余额和门店余额不一致,账户id{},门店id{},账户余额:{},从流水测获取的余额:{}", 123, 456, 7, 89);
+        String tmp =String.format("合同余额不一致coopId={}, 分门店账户余额和门店余额不一致,账户id{},门店id{},账户余额:{},从流水测获取的余额:{}",123,456, 6, 7, 8);
+        System.out.println("tmp:: " + tmp);
+            throw new RuntimeException(String.format("合同余额不一致coopId=%s, 分门店账户余额和门店余额不一致,账户id%s,门店id%s,账户余额:%s,从流水测获取的余额:%s",123,456, 6, 7, 8));
+
+        }
 }
 
 
