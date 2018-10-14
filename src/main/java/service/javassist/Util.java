@@ -16,6 +16,21 @@ public class Util {
         return pool.makeClass(className);
     }
 
+    public static CtClass getClass(String className) {
+        if (className == null) {
+            return null;
+        }
+        ClassPool pool = ClassPool.getDefault();
+        CtClass result;
+        try {
+             result =  pool.get(className);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return  result;
+    }
+
     public static boolean makeMethod(String stateMent, CtClass clazz) {
         if (clazz == null || stateMent == null) {
             return false;
@@ -59,9 +74,9 @@ public class Util {
         Method getter = instance.getClass().getMethod("getChar");
         System.out.println(getter.invoke(instance));
 
-
-
     }
+
+
 
     public enum Type {
         MY_INT("int"),
