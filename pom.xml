@@ -19,6 +19,7 @@
             <artifactId>libthrift</artifactId>
             <version>${thrift.version}</version>
         </dependency>
+
     </dependencies>
 
 
