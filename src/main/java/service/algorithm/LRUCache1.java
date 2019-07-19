@@ -5,12 +5,15 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by zhanglinxing on 2018/1/2.
  * 思路:使用链表（易于移动数据，查找都是根据key来，数组下标优势丧失）+capacity
  * 尝试：使用当前这种情况，get效率很低，需要O(n)
  * 照抄网上hashmap+list实现http://blog.csdn.net/flying_panda/article/details/48352207
+ * 更新于20190327 主要思想是Map+队列（只不过队列是双向且需要调整元素位置）
  */
 public class LRUCache1<K, V> {
     private static final Logger LOGGER = LoggerFactory.getLogger(LRUCache1.class);
@@ -95,6 +98,24 @@ public class LRUCache1<K, V> {
         return hashMap.get(key);
     }
 
+    //使用LinkedHashMap实现
+    public static class LRUCache<K,V> extends LinkedHashMap<K,V> {
+
+        private int size;
+
+        public LRUCache(int size){
+            this(size,16,0.75f,true);
+        }
+        public LRUCache(int size,int initialSize,float loadFactor,boolean accessOrder){
+            super(initialSize,loadFactor,accessOrder);
+            this.size = size;
+        }
+
+        protected boolean removeEldestEntry(Map.Entry<K, V> eldest){
+            return this.size() > size;
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -130,24 +151,27 @@ public class LRUCache1<K, V> {
         lru.get(4);
         System.out.println(lru.toString());
         System.out.println();
+
+        System.out.println("===========================LinkedHashMap 链表实现===========================");
+        LRUCache<Integer, String> lru1 = new LRUCache(5);
+        lru1.put(1, "11");
+        lru1.put(2, "11");
+        lru1.put(3, "11");
+        lru1.put(4, "11");
+        lru1.put(5, "11");
+        lru1.put(5, "12");
+        System.out.println(lru1.toString());
+        lru1.put(6, "66");
+        lru1.get(2);
+        lru1.put(7, "77");
+        lru1.get(4);
+        System.out.println(lru1.toString());
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        //  lruCache1();
-        Date date = new Date();
-        System.out.println("date:" + date + "  long: " + date.getTime());
-        date = new Date(date.getTime());
-        System.out.println(date);
-        printStack();
+          lruCache1();
     }
-
-    public  static void  printStack(){
-            LOGGER.info("分门店账户余额和门店余额不一致,账户id{},门店id{},账户余额:{},从流水测获取的余额:{}", 123, 456, 7, 89);
-        String tmp =String.format("合同余额不一致coopId={}, 分门店账户余额和门店余额不一致,账户id{},门店id{},账户余额:{},从流水测获取的余额:{}",123,456, 6, 7, 8);
-        System.out.println("tmp:: " + tmp);
-            throw new RuntimeException(String.format("合同余额不一致coopId=%s, 分门店账户余额和门店余额不一致,账户id%s,门店id%s,账户余额:%s,从流水测获取的余额:%s",123,456, 6, 7, 8));
-
-        }
 }
 
 
